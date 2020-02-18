@@ -50,7 +50,7 @@ const PostCard = ({ post, user }) => {
   const dispatch = useDispatch();
 
   let dateCreated = post.created_at;
-  let d = new Date();
+  let d = new Date(dateCreated);
   let months = [
     "January",
     "February",
@@ -65,9 +65,9 @@ const PostCard = ({ post, user }) => {
     "November",
     "December"
   ];
-  let month = months[d.getMonth(dateCreated)];
-  let day = d.getDate(dateCreated);
-  let year = d.getFullYear(dateCreated);
+  let month = months[d.getMonth()];
+  let day = d.getDate();
+  let year = d.getFullYear();
 
   const onHandleDelete = id => {
     try {
