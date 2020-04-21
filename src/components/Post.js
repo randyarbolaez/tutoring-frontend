@@ -8,12 +8,15 @@ import * as postActions from "../store/actions/posts-actions";
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 4vh;
+  margin-bottom: 10vh;
 `;
 
 const Post = () => {
-  const posts = useSelector(state => state.post.searchPosts);
+  const posts = useSelector((state) => state.post.searchPosts);
   const dispatch = useDispatch();
-  const isUserLoggedIn = useSelector(state => state.auth);
+  const isUserLoggedIn = useSelector((state) => state.auth);
 
   useEffect(() => {
     async function fetchData() {
@@ -24,7 +27,7 @@ const Post = () => {
 
   return (
     <Wrapper>
-      {posts.map(post => {
+      {posts.map((post) => {
         return <PostCard key={post._id} post={post} user={isUserLoggedIn} />;
       })}
     </Wrapper>

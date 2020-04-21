@@ -7,30 +7,29 @@ export const DELETE_POST = "DELETE_POST";
 export const SEARCH_POSTS = "SEARCH_POSTS";
 
 export const searchPosts = (search, posts) => {
-  return async dispatch => {
-    let postsThatWereSearchedFor = posts.allPosts.filter(post => {
+  return async (dispatch) => {
+    let postsThatWereSearchedFor = posts.allPosts.filter((post) => {
       return post.title.toLowerCase().includes(search.toLowerCase());
     });
-
     dispatch({
       type: SEARCH_POSTS,
-      posts: postsThatWereSearchedFor
+      posts: postsThatWereSearchedFor,
     });
   };
 };
 
 export const createPost = (title, description, token) => {
-  return async dispatch => {
+  return async (dispatch) => {
     const res = await fetch(`${ENV.apiUrl}post/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         title,
-        description
-      })
+        description,
+      }),
     });
     const resData = await res.json();
     if (!res.ok) {
@@ -43,14 +42,14 @@ export const createPost = (title, description, token) => {
         _id: resData._id,
         title: title,
         description: description,
-        user: resData.user
-      }
+        user: resData.user,
+      },
     });
   };
 };
 
 export const fetchPosts = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const res = await fetch(`${ENV.apiUrl}post/posts`);
 
@@ -63,7 +62,7 @@ export const fetchPosts = () => {
 
       dispatch({
         type: READ_POST,
-        posts: loadedPosts
+        posts: loadedPosts,
       });
     } catch (err) {
       throw err;
@@ -71,14 +70,14 @@ export const fetchPosts = () => {
   };
 };
 
-export const deletePost = post => {
-  return async dispatch => {
+export const deletePost = (post) => {
+  return async (dispatch) => {
     let user = JSON.parse(localStorage.getItem("userData"));
     const res = await fetch(`${ENV.apiUrl}post/delete/${post}`, {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${user.token}`
-      }
+        Authorization: `Bearer ${user.token}`,
+      },
     });
     if (!res.ok) {
       throw new Error("Something went wrong");

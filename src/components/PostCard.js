@@ -17,9 +17,20 @@ const Description = styled.p`
 `;
 
 const Wrapper = styled.div`
-  margin: 2% 2%;
+  /* Background color */
+  /* background-color: rgba(0, 0, 0, 0.3); */
+
+  /* You can use gradient background color such as
+    background: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 100%); */
+
+  /* Curved corners */
+  /* border-bottom-left-radius: 50% 40%; */
+  border-top-left-radius: 40% 50%;
+  border-bottom-right-radius: 40% 50%;
+  /* border-top-right-radius: 50% 40%; */
+  flex: 0 1 20%;
+  margin: 2vw 0 0 -2vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 5%;
   transition: 0.3s;
   padding: 4%;
   width: 20%;
@@ -38,6 +49,11 @@ const Wrapper = styled.div`
     &:hover {
       color: #efd3d7;
     }
+  }
+
+  &:hover {
+    background: #fbe7b5;
+    margin: 2vh 4vw;
   }
 `;
 
@@ -63,13 +79,13 @@ const PostCard = ({ post, user }) => {
     "September",
     "October",
     "November",
-    "December"
+    "December",
   ];
   let month = months[d.getMonth()];
   let day = d.getDate();
   let year = d.getFullYear();
 
-  const onHandleDelete = id => {
+  const onHandleDelete = (id) => {
     try {
       dispatch(postActions.deletePost(id));
       window.location.reload();
