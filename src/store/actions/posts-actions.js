@@ -3,7 +3,9 @@
 import ENV from "../../env";
 export const CREATE_POST = "CREATE_POST";
 export const READ_POST = "READ_POST";
+export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
+
 export const SEARCH_POSTS = "SEARCH_POSTS";
 
 export const searchPosts = (search, posts) => {
@@ -67,6 +69,50 @@ export const fetchPosts = () => {
     } catch (err) {
       throw err;
     }
+  };
+};
+
+export const updatePost = (
+  title,
+  description,
+  likes,
+  usersThatLikedThePost,
+  postid,
+  token
+) => {
+  return async (dispatch) => {
+    // add user to usersThatLikedThePost so they dont double like it
+    let idOfUserThroughLocalStorage = JSON.parse(
+      localStorage.getItem("userData")
+    ).userId;
+    usersThatLikedThePost.push(idOfUserThroughLocalStorage);
+
+    const res = await fetch(`${ENV.apiUrl}post/update/${postid}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        likes: likes + 1,
+        usersThatLikedThePost,
+      }),
+    });
+    const resData = await res.json();
+    if (!res.ok) {
+      throw new Error("Something went wrong");
+    }
+    dispatch({
+      type: UPDATE_POST,
+      updatedPostData: {
+        _id: resData.beforeUpdatedPost._id,
+        likes: resData.beforeUpdatedPost.likes + 1,
+        user: resData.beforeUpdatedPost.user,
+        usersThatLikedThePost: resData.updated.usersThatLikedThePost,
+      },
+    });
   };
 };
 

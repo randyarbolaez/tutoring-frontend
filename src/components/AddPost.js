@@ -60,7 +60,7 @@ const Button = styled.button`
 `;
 
 const AddPost = () => {
-  let token = useSelector(state => state.auth.token);
+  let token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -73,12 +73,13 @@ const AddPost = () => {
     }
     try {
       await dispatch(action);
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
   };
 
-  const inputChangeHandler = e => {
+  const inputChangeHandler = (e) => {
     const { name, value } = e.target;
     if (name === "title") {
       setTitle(value);

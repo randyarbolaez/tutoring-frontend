@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
@@ -55,28 +54,34 @@ const Input = styled.input`
 `;
 
 const Nav = () => {
-  let isUserLoggedIn = useSelector(state => state.auth.token);
-  let posts = useSelector(state => state.post);
+  let isUserLoggedIn = useSelector((state) => state.auth.token);
+  let posts = useSelector((state) => state.post);
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
+  const [user, setUser] = useState(false);
 
   useEffect(() => {
     if (!isUserLoggedIn) {
       isUserLoggedIn = null;
+      setUser(false);
     }
-  });
+    if (isUserLoggedIn) {
+      setUser(true);
+    }
+  }, [isUserLoggedIn]);
 
   const handleOnClick = async () => {
     let action = authActions.logout();
-    console.log("balhhh");
     try {
       await dispatch(action);
+      setUser(false);
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
   };
 
-  const onInputChangeHandler = async e => {
+  const onInputChangeHandler = async (e) => {
     let { value } = e.target;
     setSearch(value);
     let action = postActions.searchPosts(value, posts);
@@ -89,7 +94,7 @@ const Nav = () => {
 
   return (
     <Wrapper>
-      {isUserLoggedIn ? (
+      {user ? (
         <>
           <Button onClick={handleOnClick}>Logout</Button>
           <Input

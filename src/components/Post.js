@@ -16,7 +16,6 @@ const Wrapper = styled.div`
 const Post = () => {
   const posts = useSelector((state) => state.post.searchPosts);
   const dispatch = useDispatch();
-  const isUserLoggedIn = useSelector((state) => state.auth);
 
   useEffect(() => {
     async function fetchData() {
@@ -28,7 +27,7 @@ const Post = () => {
   return (
     <Wrapper>
       {posts.map((post) => {
-        return <PostCard key={post._id} post={post} user={isUserLoggedIn} />;
+        return <PostCard key={post._id} post={post} />;
       })}
     </Wrapper>
   );

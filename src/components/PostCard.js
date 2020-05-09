@@ -1,5 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import * as postActions from "../store/actions/posts-actions";
@@ -14,6 +14,8 @@ const Description = styled.p`
   text-align: center;
   color: #a3a3a3;
   /* width: 33%; */
+  width: 20vmax;
+  height: 3.5vmax;
 `;
 
 const Wrapper = styled.div`
@@ -24,10 +26,10 @@ const Wrapper = styled.div`
     background: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 100%); */
 
   /* Curved corners */
-  /* border-bottom-left-radius: 50% 40%; */
-  border-top-left-radius: 40% 50%;
-  border-bottom-right-radius: 40% 50%;
-  /* border-top-right-radius: 50% 40%; */
+  border-bottom-left-radius: 5%;
+  border-top-left-radius: 90%;
+  border-bottom-right-radius: 5%;
+  border-top-right-radius: 90%;
   flex: 0 1 20%;
   margin: 2vw 0 0 -2vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -62,8 +64,32 @@ const DateMade = styled.p`
   text-align: center;
 `;
 
-const PostCard = ({ post, user }) => {
+const LikeContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0%;
+  .right-span {
+    margin-left: 25%;
+  }
+  .left-span {
+    margin-right: 25%;
+  }
+`;
+
+const PostCard = ({ post }) => {
   const dispatch = useDispatch();
+  const [userId, setUserId] = useState(false);
+  const isUserLoggedIn = useSelector((state) => state.auth);
+  let token = useSelector((state) => state.auth.token);
+
+  useEffect(() => {
+    if (!isUserLoggedIn.userId) {
+      console.log("NO USER");
+    }
+    if (isUserLoggedIn.userId) {
+      setUserId(post.usersThatLikedThePost.includes(isUserLoggedIn.userId));
+    }
+  }, [isUserLoggedIn]);
 
   let dateCreated = post.created_at;
   let d = new Date(dateCreated);
@@ -94,12 +120,65 @@ const PostCard = ({ post, user }) => {
     }
   };
 
+  const onlikeOrDislikePostHandler = (
+    title,
+    description,
+    likes,
+    usersThatLikedThePost,
+    postid
+  ) => {
+    if (userId) {
+      console.log("already liked");
+      return;
+    }
+    if (!isUserLoggedIn.userId) {
+      console.log("no user");
+      return;
+    }
+    if (isUserLoggedIn.userId) {
+      try {
+        dispatch(
+          postActions.updatePost(
+            title,
+            description,
+            likes,
+            usersThatLikedThePost,
+            postid,
+            token
+          )
+        );
+        window.location.reload();
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  // console.log(post);
+
   return (
     <Wrapper>
       <Title>{post.title}</Title>
       <Description>{post.description}</Description>
       <DateMade>{`${month} ${day}, ${year}`}</DateMade>
-      {user.userId === post.user ? (
+      <LikeContainer>
+        <span
+          onClick={() => {
+            onlikeOrDislikePostHandler(
+              post.title,
+              post.description,
+              post.likes,
+              post.usersThatLikedThePost,
+              post._id
+            );
+          }}
+          className="right-span"
+        >
+          <button>{userId ? "♥︎" : "♡"}</button>
+        </span>
+        <span className="left-span">{post.likes || 0}</span>
+      </LikeContainer>
+      {isUserLoggedIn.userId === post.user ? (
         <button onClick={() => onHandleDelete(post._id)}>Delete</button>
       ) : null}
     </Wrapper>
