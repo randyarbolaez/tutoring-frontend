@@ -51,9 +51,9 @@ const Wrapper = styled.div`
   }
 
   &:hover {
-    border-left: 0.3vmax #fcf6bd solid;
-    border-bottom: 0.3vmax #fcf6bd solid;
-    border-right: 0.3vmax #fcf6bd solid;
+    border-left: 0.3vmax #ef6f6c solid;
+    border-bottom: 0.3vmax #ef6f6c solid;
+    border-right: 0.3vmax #ef6f6c solid;
     box-shadow: 0 0 0 0;
     background: #c8d0d8;
     transition: 0.5s;
