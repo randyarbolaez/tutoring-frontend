@@ -5,37 +5,34 @@ import styled from "styled-components";
 import * as postActions from "../store/actions/posts-actions";
 
 const Title = styled.h1`
-  font-size: 1.5em;
+  font-size: 1.5vw;
   text-align: center;
   color: #c8d0d8;
-  transition: 0.5s;
+  transition: 0.8s;
+  background: #495159;
+  border: 1vw #c8d0d8 solid;
+  border-top-left-radius: 5%;
 `;
 
 const Description = styled.p`
-  text-align: center;
   color: #a3a3a3;
-  /* width: 33%; */
-  width: 20vmax;
-  height: 3.5vmax;
-  cursor: arrow;
+  padding: 0 5vw;
+  height: 100%;
+  text-align: center;
 `;
 
 const Wrapper = styled.div`
+  text-align: center;
+
   /* Curved corners */
   border-bottom-left-radius: 5%;
-  border-top-left-radius: 25%;
+  border-top-left-radius: 5%;
   border-bottom-right-radius: 5%;
-  border-top-right-radius: 25%;
-  flex: 0 1 20%;
-  margin: 2vw 0 0 -2vw;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 0 4% 4% 4%;
-  width: 20%;
-  background: #495159;
+  border-top-right-radius: 5%;
+  flex: 0 1 22vw;
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
-
   transition: 0.5s;
   button {
     background: none;
@@ -54,12 +51,12 @@ const Wrapper = styled.div`
     border-left: 0.3vmax #ef6f6c solid;
     border-bottom: 0.3vmax #ef6f6c solid;
     border-right: 0.3vmax #ef6f6c solid;
-    box-shadow: 0 0 0 0;
     background: #c8d0d8;
     transition: 0.5s;
     h1 {
       color: #495159;
       transition: 0.5s;
+      background: none;
     }
   }
 `;

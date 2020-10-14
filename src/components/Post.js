@@ -26,9 +26,13 @@ const Post = () => {
 
   return (
     <Wrapper>
-      {posts.map((post) => {
-        return <PostCard key={post._id} post={post} />;
-      })}
+      {posts ? (
+        posts.map((post) => {
+          return <PostCard key={post._id} post={post} />;
+        })
+      ) : (
+        <h1>Loading</h1>
+      )}
     </Wrapper>
   );
 };
