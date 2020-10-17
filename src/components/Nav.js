@@ -103,7 +103,7 @@ const Nav = () => {
             onChange={onInputChangeHandler}
             placeholder="Tutoring Board"
           />
-          <Modal buttonName="Add Tutoring Post">
+          <Modal buttonName="Add Post">
             <AddPost />
           </Modal>
         </>

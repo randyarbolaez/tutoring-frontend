@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-import PostCard from "./PostCard";
+import Card from "./Card";
 import * as postActions from "../store/actions/posts-actions";
 
 const Wrapper = styled.div`
@@ -11,6 +11,12 @@ const Wrapper = styled.div`
   justify-content: center;
   margin-bottom: 4vh;
   margin-bottom: 10vh;
+`;
+
+const Title = styled.h1`
+  font-size: 3vw;
+  text-align: center;
+  color: #fff1e6;
 `;
 
 const Post = () => {
@@ -26,12 +32,12 @@ const Post = () => {
 
   return (
     <Wrapper>
-      {posts ? (
+      {posts.length ? (
         posts.map((post) => {
-          return <PostCard key={post._id} post={post} />;
+          return <Card key={post._id} post={post} bookmarkPage={false} />;
         })
       ) : (
-        <h1>Loading</h1>
+        <Title>Loading...</Title>
       )}
     </Wrapper>
   );

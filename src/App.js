@@ -6,11 +6,13 @@ import ReduxThunk from "redux-thunk";
 // import Routes from "./Routes";
 import postsReducer from "./store/reducers/posts-reducer";
 import authReducer from "./store/reducers/auth-reducer";
+import bookmarkReducer from "./store/reducers/bookmark-reducer";
 import Home from "./components/Home";
 
 const rootReducer = combineReducers({
   post: postsReducer,
-  auth: authReducer
+  auth: authReducer,
+  bookmark: bookmarkReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
