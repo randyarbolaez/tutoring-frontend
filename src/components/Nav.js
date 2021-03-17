@@ -8,9 +8,9 @@ import * as postActions from "../store/actions/posts-actions";
 import Modal from "./ModalComponent";
 import Authenticate from "./Authenticate";
 import AddPost from "./AddPost";
-
+// background: transparent;
 const Wrapper = styled.div`
-  background: transparent;
+  // background: purple;
   display: inline-flex;
   justify-content: space-around;
   width: 100%;
@@ -21,6 +21,7 @@ const Title = styled.h1`
   font-size: 2.5em;
   text-align: center;
   color: #ef6f6c;
+  margin-top:0;
 `;
 
 const Button = styled.button`

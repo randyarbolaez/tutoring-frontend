@@ -11,11 +11,6 @@ const Wrapper = styled.div`
   margin-bottom: 10vh;
 `;
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-`;
 
 const Title = styled.h1`
   font-size: 3vw;
@@ -28,12 +23,10 @@ const Bookmark = ({ bookmarks }) => {
     <Wrapper>
       {bookmarks.length ? (
         bookmarks.map((bookmark) => (
-          <Container key={bookmark._id}>
-            <Card post={bookmark} bookmarkPage={true} />
-          </Container>
+            <Card key={bookmark._id} post={bookmark} bookmarkPage={true} />
         ))
       ) : (
-        <Title>You have not Bookmarked anything</Title>
+        <Title>You have not bookmarked anything</Title>
       )}
     </Wrapper>
   );

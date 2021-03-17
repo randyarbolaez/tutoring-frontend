@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 import * as postActions from "../store/actions/posts-actions";
 import * as bookmarkActions from "../store/actions/bookmark-actions";
@@ -11,48 +13,53 @@ const TitleContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #c8d0d8;
-  transition: 0.8s;
-  background: #6c757d;
-  border: 0.5vw #1d3557 solid;
-  border-radius: 105px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  margin: 0 5vw;
+  background-color: #F8F7FF;
+  border-top-right-radius:0.5vw;
+  border-top-left-radius:0.5vw;
   span {
     :hover {
-      color: #1d3557;
+      // color: #1d3557;
+      color: #F7934C;
     }
   }
 `;
 
 const Title = styled.h1`
   font-size: 1.3vw;
+  border-bottom: 0.2vw #F7934C solid;
   margin: 0;
   margin-right: 0.5vw;
+  color:#1F1300;
+  padding-top:2%;
+  padding:0.4vw 5vw;
+  font-weight:400;
 `;
 
 const Description = styled.p`
   display: flex;
   justify-content: center;
   margin: 0;
-  color: #a3a3a3;
-  padding: 2vw 5vw;
-  height: 5vw;
-  width: 15vw;
+  color: #FF7700;
+  padding: 0.4vw 5vw;
+  // height: 5vw;
+  // width: 15vw;
   text-align: center;
-  background-color: #1d3557;
-  border-radius: 105px;
-  font-size: 1.2vw;
+  background-color: #F8F7FF;
+  font-size: 1vw;
 `;
 
 const Wrapper = styled.div`
+  // position: relative;
   flex: 0 1 25vw;
   display: flex;
   margin: 0 2vw;
   flex-direction: column;
   word-wrap: break-word;
-  background: #c8d0d8;
+  background-color: #F8F7FF;
+  border-bottom-right-radius:0.5vw;
+  border-bottom-left-radius:0.5vw;
+  border-top-right-radius:0.5vw;
+  border-top-left-radius:0.5vw;
   button {
     transition: 0.5s;
     background: none;
@@ -69,8 +76,15 @@ const Wrapper = styled.div`
 `;
 
 const DateMade = styled.p`
+  font-size:0.9vw;
   color: #284b63;
   text-align: center;
+  background:#CEDADA;
+  margin:0 6vw;
+  padding:0.4vw;
+  border-top-right-radius:0.5vw;
+  border-top-left-radius:0.5vw;
+  margin-top: auto;
 `;
 
 const PostCard = ({
@@ -132,6 +146,11 @@ const PostCard = ({
   return (
     <Wrapper>
       <TitleContainer>
+      {isUserLoggedIn.userId === user ? (
+          <span>
+            <DeleteOutlineIcon fontSize="small" onClick={() => onHandleDelete(_id)}/>
+          </span>
+        ) : null}
         <Title>{title}</Title>
         {isUserLoggedIn.userId ? (
           isUserLoggedIn.userId === user ? null : (
@@ -158,9 +177,6 @@ const PostCard = ({
       </TitleContainer>
       <Description>{description}</Description>
       <DateMade>{`${month} ${day}, ${year}`}</DateMade>
-      {isUserLoggedIn.userId === user ? (
-        <button onClick={() => onHandleDelete(_id)}>Delete</button>
-      ) : null}
     </Wrapper>
   );
 };
