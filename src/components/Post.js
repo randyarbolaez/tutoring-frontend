@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -19,24 +19,30 @@ const Title = styled.h1`
   color: #fff1e6;
 `;
 
-const Post = () => {
+const Post = (props) => {
+  const [isDoneSearching,setIsDoneSearching] = useState(false)
   const posts = useSelector((state) => state.post.searchPosts);
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     async function fetchData() {
       await dispatch(postActions.fetchPosts());
+      setIsDoneSearching(true)
     }
     fetchData();
+    setIsDoneSearching(false)
   }, [dispatch]);
-
+  
   return (
     <Wrapper>
       {posts.length ? (
         posts.map((post) => {
           return <Card key={post._id} post={post} bookmarkPage={false} />;
         })
-      ) : (
+      ) : isDoneSearching && posts.length == 0 ? (
+        <Title>No Posts</Title>
+      ):(
         <Title>Loading...</Title>
       )}
     </Wrapper>

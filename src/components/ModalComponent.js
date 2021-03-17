@@ -21,11 +21,14 @@ function getModalStyle() {
 const Button = styled.button`
   background: none;
   border: none;
-  color: #e8f0ff;
+  color: #F8F7FF;
   font-size: 2em;
   outline: none;
   &:hover {
-    color: #747c92;
+    padding-bottom: 0.5vw;
+    cursor:pointer;
+    color: #CC5803;
+    border-bottom:0.2vw #CC5803 solid;
   }
 `;
 
@@ -33,9 +36,9 @@ const useStyles = makeStyles(theme => ({
   paper: {
     position: "absolute",
     width: 400,
-    backgroundColor: "#949396",
+    backgroundColor:'#F8F7FF',
     outlineStyle: "none",
-    padding: "2%",
+    padding: "2% 2% 0 2%",
     display: "flex",
     justifyContent: "center",
     borderRadius: "3%"

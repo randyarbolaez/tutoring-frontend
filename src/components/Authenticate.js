@@ -5,41 +5,45 @@ import styled from "styled-components";
 import * as authActions from "../store/actions/auth-actions";
 
 const Wrapper = styled.div`
-  background: transparent;
   display: inline-flex;
   flex-direction: column;
-  justify-content: center;
 `;
 
 const Title = styled.h1`
   font-size: 3em;
-  color: #e8f0ff;
+  color: #F7934C;
   margin-bottom: 2%;
 `;
 
 const Input = styled.input`
-  border: 1px solid #4c4b63;
+  border: none;
+  border: 0.2vw solid #1F1300;
+  border-radius:5vw;
   background: none;
+  outline:none;
   margin-bottom: 3%;
-  width: 75%;
-  padding: 8%;
-  border-radius: 3%;
+  width: 70%;
+  padding: 3% 4%;
+  margin-left:30%;
   text-align: center;
-  color: #eee5e9;
+  color: #1F1300;
   font-size: 1.2em;
   &::placeholder {
-    color: #1c1c1c;
+    color: #F7934C;
     font-size: 1em;
   }
 `;
 
 const Button = styled.button`
+  margin-top:1.2vw;
+  outline:none;
   background: none;
   border: none;
-  color: #e8f0ff;
+  color: #1F1300;
   font-size: 1.3em;
+  cursor:pointer;
   &:hover {
-    color: #747c92;
+    color: #CC5803;
   }
 `;
 

@@ -8,13 +8,15 @@ import * as postActions from "../store/actions/posts-actions";
 import Modal from "./ModalComponent";
 import Authenticate from "./Authenticate";
 import AddPost from "./AddPost";
-// background: transparent;
+
+
 const Wrapper = styled.div`
   // background: purple;
   display: inline-flex;
   justify-content: space-around;
   width: 100%;
   align-items: baseline;
+  margin-top:3vw;
 `;
 
 const Title = styled.h1`
@@ -27,30 +29,30 @@ const Title = styled.h1`
 const Button = styled.button`
   background: none;
   border: none;
-  color: #e8f0ff;
+  color: #F8F7FF;
   font-size: 2em;
   outline: none;
   &:hover {
-    color: #747c92;
+    padding-bottom: 0.5vw;
+    cursor:pointer;
+    color: #CC5803;
+    border-bottom:0.2vw #CC5803 solid;
   }
 `;
 
 const Input = styled.input`
-  border: none;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  background: none;
-  margin-bottom: 3%;
-  padding: 3%;
-  border-radius: 3%;
-  text-align: center;
-  color: #ef6f6c;
-  font-size: 1.5em;
-  margin-top: 2%;
   outline: none;
+  background: none;
+  border: none;
+  border-bottom:0.2vw #F8F7FF solid;
+  text-align:center;
+  color: #F8F7FF;
+  font-size: 1.4em;
+  padding: 0.5%;
+  margin-bottom: 3%;
   &::placeholder {
-    font-size: 1.6em;
-    text-align: center;
-    color: #ef6f6c;
+    color: #F8F7FF;
+    font-size: 1.4em;
   }
 `;
 
@@ -99,6 +101,7 @@ const Nav = () => {
         <>
           <Button onClick={handleOnClick}>Logout</Button>
           <Input
+            style={{fontSize:'2vw'}}
             type="text"
             value={search}
             onChange={onInputChangeHandler}
@@ -110,7 +113,6 @@ const Nav = () => {
         </>
       ) : (
         <>
-          <Title>Tutoring Board</Title>
           <Input
             type="text"
             value={search}
